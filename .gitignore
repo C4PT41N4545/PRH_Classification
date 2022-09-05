@@ -1,0 +1,7 @@
+*.log
+Raw_Data/
+.ipynb_checkpoints/
+Process_Data/
+process.ipynb
+*.ipynb
+Prediction_Results/

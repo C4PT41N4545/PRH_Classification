@@ -1,0 +1,23 @@
+Processing 1.ข้อมูลการรับแจ้งประสบอันตราย.csv
+Processing 2.1 ข้อมูลการวินิจฉัย.csv
+Processing 3.1  ข้อมูลใบแจ้งหนี้-ใบเสร็จค่ารักษาพยาบาล.csv
+Processing 3.2  ข้อมูลรายละเอียดใบแจ้งหนี้-ใบเสร็จค่ารักษาพยาบาล
+Processing PRH5011
+PRH5011_2549.xlsx 201548
+PRH5011_2550.xlsx 195070
+PRH5011_2551.xlsx 174088
+PRH5011_2552.xlsx 146077
+PRH5011_2553.xlsx 145860
+PRH5011_2554.xlsx 129392
+PRH5011_2555.xlsx 126000
+PRH5011_2556.xlsx 110105
+PRH5011_2557.xlsx 100046
+PRH5011_2558.xlsx 94934
+PRH5011_2559.xlsx 88907
+PRH5011_2560.xlsx 85697
+PRH5011_2561.xlsx 84631
+PRH5011_2562.xlsx 90141
+PRH5011_2563.xlsx 81362
+PRH5011_2564.xlsx 75852
+total length: 1929710
+Raw Data Processed!
