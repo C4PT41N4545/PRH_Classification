@@ -16,7 +16,7 @@ def join_PRH(df, df_prh):
     df['ACCIDENT_ISSUE_CODE'] = df['ACCIDENT_ISSUE_CODE'].astype("string")
     df_prh['accident_id'] = df_prh['accident_id'].astype("string")
     df_prh.accident_id = df_prh.accident_id.str[:11]
-    
+    print(df_prh.accident_id.nunique())
     prh = df.ACCIDENT_ISSUE_CODE.isin(df_prh.accident_id)
         
     df['PRH'] = prh
