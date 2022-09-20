@@ -6,6 +6,7 @@ import os
 from sklearn.model_selection import GridSearchCV
 from sklearn import metrics
 import matplotlib.pyplot as plt
+import seaborn as sns
 os.chdir('..')
 os.chdir('5_Preprocessed')
 os.chdir('Process_Data')
@@ -44,8 +45,30 @@ print(classification_report(y_test, y_pred))
 y_pred_proba = nbrs.predict_proba(X_test)[::,1]
 fpr, tpr, _ = metrics.roc_curve(y_test,  y_pred_proba)
 auc = metrics.roc_auc_score(y_test, y_pred_proba)
-plt.plot(fpr,tpr,label="AUC="+str(auc))
-plt.ylabel('True Positive Rate')
-plt.xlabel('False Positive Rate')
-plt.legend(loc=4)
-plt.show()
+def roc_plot(fpr, tpr, auc):
+    plt.plot(fpr,tpr,label="AUC="+str(auc))
+    plt.ylabel('True Positive Rate')
+    plt.xlabel('False Positive Rate')
+    plt.legend(loc=4)
+    plt.show()
+roc_plot(fpr,tpr,auc)
+cf_matrix = confusion_matrix(y_test, y_pred)
+def plot_confusion(cf_matrix):
+    group_names = ['True Neg','False Pos','False Neg','True Pos']
+    group_counts = ["{0:0.0f}".format(value) for value in
+    cf_matrix.flatten()]
+    group_percentages = ["{0:.2%}".format(value) for value in
+    cf_matrix.flatten()/np.sum(cf_matrix)]
+    labels = [f"{v1}\n{v2}\n{v3}" for v1, v2, v3 in
+    zip(group_names,group_counts,group_percentages)]
+    labels = np.asarray(labels).reshape(2,2)
+    ax = sns.heatmap(cf_matrix, annot=labels, fmt='', cmap='Blues')
+    ax.set_title('Seaborn Confusion Matrix with labels\n\n');
+    ax.set_xlabel('\nPredicted Values')
+    ax.set_ylabel('Actual Values ');
+    ## Ticket labels - List must be in alphabetical order
+    ax.xaxis.set_ticklabels(['False','True'])
+    ax.yaxis.set_ticklabels(['False','True'])
+    ## Display the visualization of the Confusion Matrix.
+    plt.show()
+plot_confusion(cf_matrix)
