@@ -4,6 +4,8 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import classification_report, confusion_matrix
 import os
 from sklearn.model_selection import GridSearchCV
+from sklearn import metrics
+import matplotlib.pyplot as plt
 os.chdir('..')
 os.chdir('5_Preprocessed')
 os.chdir('Process_Data')
@@ -20,17 +22,17 @@ def hyperparameters(X_train, y_train, nfolds):
     #create a dictionary of all values we want to test
     param_grid = {'n_neighbors': np.arange(3, 15)}
     # decision tree model
-    dtree_model= KNeighborsClassifier()
+    model= KNeighborsClassifier()
     #use gridsearch to test all values
-    dtree_gscv = GridSearchCV(dtree_model, param_grid, cv=nfolds)
+    gscv = GridSearchCV(model, param_grid, cv=nfolds)
     #fit model to data
-    dtree_gscv.fit(X_train, y_train)
-    print(dtree_gscv.best_params_)
-    print(dtree_gscv.best_score_)
-    return dtree_gscv.best_params_
+    gscv.fit(X_train, y_train)
+    print(gscv.best_params_)
+    print(gscv.best_score_)
+    return gscv.best_params_
 
-parameters = hyperparameters(X_train, y_train, nfolds = 5)
-print(parameters)
+#parameters = hyperparameters(X_train, y_train, nfolds = 5)
+parameters = {"n_neighbors":13}
 nbrs = KNeighborsClassifier(n_neighbors=parameters['n_neighbors'])
 
 nbrs.fit(X_train, y_train)
@@ -39,3 +41,11 @@ print("----------------------")
 print("Accuracy = %f " % nbrs.score(X_test, y_test))
 print("----------------------")
 print(classification_report(y_test, y_pred))
+y_pred_proba = nbrs.predict_proba(X_test)[::,1]
+fpr, tpr, _ = metrics.roc_curve(y_test,  y_pred_proba)
+auc = metrics.roc_auc_score(y_test, y_pred_proba)
+plt.plot(fpr,tpr,label="AUC="+str(auc))
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+plt.legend(loc=4)
+plt.show()
