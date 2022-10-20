@@ -164,8 +164,7 @@ def main(load_model):
     print("-"*50)
 
     # under
-    train_under = pd.concat([train[train.PRH == False].sample(
-        2000), train[train.PRH == True]], axis=0)
+    train_under = pd.concat([train[train.PRH == True].sample(24000),train[train.PRH == False]],axis=0)
     X_train_under = train_under.drop(columns=['PRH'])
     y_train_under = train_under['PRH']
     if load_model:
@@ -197,8 +196,7 @@ def main(load_model):
     print("-"*50)
 
     # over
-    train_over = pd.concat([train[train.PRH == True].sample(
-        501719, replace=True), train[train.PRH == False]], axis=0)
+    train_over = pd.concat([train[train.PRH == False].sample(470000, replace=True),train[train.PRH == True]],axis=0)
     X_train_over = train_over.drop(columns=['PRH'])
     y_train_over = train_over['PRH']
     if load_model:

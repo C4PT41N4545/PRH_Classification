@@ -5,3 +5,4 @@ Process_Data/
 process.ipynb
 *.ipynb
 Prediction_Results/
+*.sav
